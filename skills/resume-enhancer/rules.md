@@ -29,14 +29,19 @@ rule, and the change table says so.
     Frameworks, Data, Cloud, Tools), label in bold, comma list after. Include the concept words
     postings use (Machine Learning, REST APIs, Agile, OOP), not only tool names. Every skill is
     backed by a bullet or by the facts file.
+
 13. **Experience:** `Bold Title | italic Company, team, City` on the left, dates on the right.
     A promotion is one entry with an arrow (`Developer → Senior Developer`). 1-5 bullets, the
     most for the current role.
+
 14. **Projects:** `Bold Name - context (hackathon, award) | italic tech stack` on the left, date
     on the right. The name links to the live site, repo or write-up when one exists. 2-3 bullets.
+
 15. **Involvements:** `Bold Org | italic Role` on the left, dates on the right. One bullet each.
+
 16. **Education:** school and city, then `Program, Credential | GPA` (GPA only if they list it)
     with dates, then one "Relevant Coursework" bullet.
+
 17. The left side of a heading stays short so it doesn't collide with the date.
 
 ## Bullets

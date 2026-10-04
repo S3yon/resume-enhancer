@@ -1,0 +1,12 @@
+{
+  "name": "resume-enhancer",
+  "owner": {
+    "name": "Seyon Sri"
+  },
+  "plugins": [
+    {
+      "name": "resume-enhancer",
+      "source": "./"
+    }
+  ]
+}

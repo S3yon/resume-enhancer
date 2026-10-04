@@ -1,0 +1,15 @@
+{
+  "name": "resume-enhancer",
+  "owner": {
+    "name": "Seyon Sri"
+  },
+  "plugins": [
+    {
+      "name": "resume-enhancer",
+      "source": "./",
+      "description": "Rebuilds a resume to a one-page house style, shows every change with the rule behind it before making it, and renders it to PDF with LaTeX.",
+      "version": "0.1.0"
+    }
+  ],
+  "description": "Rebuilds a resume to a one-page house style, shows every change with the rule behind it before making it, and renders it to PDF with LaTeX."
+}

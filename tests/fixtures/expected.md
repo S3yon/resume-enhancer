@@ -10,12 +10,13 @@ rule 11: sections reordered to Skills, Experience, Projects, Involvements, Educa
 rule 22: dates normalized to `Mon YYYY -- Mon YYYY` (2023-05 to May 2023, May '24 to May 2024)
 rule 22: "Summer 2022" gets a Gap row asking for the months, not a guessed month
 rule 18: "Responsible for", "Helped with" and "Was responsible for" openers become strong verbs
+that claim no more than the original, or Gap rows asking which part was theirs
 rule 18: present-tense bullets in the finished Example Logistics job move to past tense
 rule 2: the long REST API bullet is cut down to one line
 rule 20: "Improved app performance significantly" gets a Gap row asking how much
 rule 12: the skills paragraph becomes labeled lines, without "fast learner" or "team player"
 rule 9: the LinkedIn URL is shown as `linkedin.com/in/jordanlee`
-rule 15: the Coding Club entry keeps one bullet (a Cut row)
+rule 15: the Coding Club entry ends with one bullet (merged or cut)
 rule 1: Cut rows, weakest lines first, bring it to one page
 
 ## Must not

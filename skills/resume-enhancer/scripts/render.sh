@@ -2,7 +2,8 @@
 # Render a resume .tex to PDF and enforce a page limit.
 # Usage: render.sh <src.tex> <out.pdf> [pages]      pages: 1 (default) or 2
 # Exit codes: 0 rendered within the limit; 1 bad arguments, LaTeX error, missing package or over
-# the limit (no PDF written); 3 no LaTeX installed. Set PDFLATEX to use a specific binary.
+# the limit (no PDF at <out.pdf>; over the limit leaves <out>-overflow.pdf); 3 no LaTeX installed.
+# Set PDFLATEX to use a specific binary.
 set -euo pipefail
 
 [ $# -ge 2 ] || { echo "usage: render.sh <src.tex> <out.pdf> [pages]"; exit 1; }
@@ -39,7 +40,10 @@ fi
 
 PAGES=$(grep -o 'Output written on resume.pdf ([0-9]* page' "$BUILD/resume.log" | grep -o '[0-9]*' | head -1)
 if [ "$PAGES" -gt "$LIMIT" ]; then
+  OVERFLOW="${OUT%.pdf}-overflow.pdf"
+  cp "$BUILD/resume.pdf" "$OVERFLOW"
   echo "FAIL: rendered $PAGES pages, limit is $LIMIT. Cut content, don't shrink the macros."
+  echo "The over-length PDF is at $OVERFLOW; run fill_check.py on it to see what spilled."
   exit 1
 fi
 OVERFULL=$(grep -c 'Overfull \\hbox' "$BUILD/resume.log" || true)

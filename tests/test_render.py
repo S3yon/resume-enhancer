@@ -88,6 +88,17 @@ class Render(unittest.TestCase):
         self.assertFalse(pdf)
 
     @needs_latex
+    def test_overflow_pdf_kept_for_cutting(self):
+        with tempfile.TemporaryDirectory() as d:
+            src, out = Path(d) / "r.tex", Path(d) / "r.pdf"
+            src.write_text(doc(2))
+            r = subprocess.run(["bash", str(RENDER), str(src), str(out)], capture_output=True, text=True)
+            self.assertEqual(r.returncode, 1, r.stdout)
+            self.assertFalse(out.exists())
+            self.assertTrue((Path(d) / "r-overflow.pdf").exists())
+            self.assertIn("r-overflow.pdf", r.stdout)
+
+    @needs_latex
     def test_two_pages_ok_with_limit_2(self):
         code, out, pdf = render(doc(2), "2")
         self.assertEqual(code, 0, out)

@@ -36,12 +36,23 @@ def render(tex, *args, env=None, keep=None):
         return r.returncode, r.stdout + r.stderr, out.exists()
 
 
-def filled(look):
+def filled(look, body=None):
     with tempfile.TemporaryDirectory() as d:
-        out = Path(d) / "out.tex"
-        subprocess.run([sys.executable, str(SCRIPTS / "fill_template.py"), str(SAMPLE), str(out),
+        src, out = Path(d) / "body.tex", Path(d) / "out.tex"
+        src.write_text(body if body is not None else SAMPLE.read_text())
+        subprocess.run([sys.executable, str(SCRIPTS / "fill_template.py"), str(src), str(out),
                         "--look", look], check=True)
         return out.read_text()
+
+
+def fill_check(tex):
+    """Render tex and return fill_check.py's stdout."""
+    with tempfile.TemporaryDirectory() as d:
+        pdf = Path(d) / "s.pdf"
+        code, out, _ = render(tex, keep=pdf)
+        assert code == 0, out
+        return subprocess.run([sys.executable, str(SCRIPTS / "fill_check.py"), str(pdf)],
+                              capture_output=True, text=True, check=True).stdout
 
 
 def left_edge(pdf):
@@ -119,6 +130,21 @@ class Template(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn("pages=1", r.stdout)
         self.assertRegex(r.stdout, r"100\.0%\s+\S")
+
+
+    def test_fill_check_flags_wrapped_bullet(self):
+        long_item = ("        \\resumeItem{Built a reporting service in Python that pulls data from four "
+                     "internal systems, cleans it, and emails a summary to every regional manager each morning "
+                     "before the daily planning call starts}\n")
+        body = SAMPLE.read_text().replace("      \\resumeItemListEnd", long_item + "      \\resumeItemListEnd", 1)
+        out = fill_check(filled("dense", body))
+        self.assertIn("wrapped bullets: 1", out)
+        self.assertRegex(out, r"<- wrapped bullet")
+
+    def test_fill_check_no_false_wrap(self):
+        out = fill_check(filled("dense"))
+        self.assertIn("wrapped bullets: 0", out)
+        self.assertNotIn("<- wrapped bullet", out)
 
 
 if __name__ == "__main__":

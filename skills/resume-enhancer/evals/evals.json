@@ -1,0 +1,54 @@
+{
+  "skill_name": "resume-enhancer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "questions-first",
+      "prompt": "Make my resume better. Here it is:\n\nSAM RIVERA\nsam@example.com\nOBJECTIVE\nLooking for a developer job.\nEXPERIENCE\nDeveloper, Example Co, 2024-01 to Present\n- Responsible for the company website",
+      "expected_output": "Sets up the folder, then asks the five custom questions in one message before changing anything.",
+      "files": [],
+      "assertions": [
+        "Section order, page length, sections in or out, target role and look are all asked in one message",
+        "Each question shows the house style as the default",
+        "No rewritten bullet or change table appears before the answers"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "table-before-render",
+      "prompt": "Use all the defaults. Here's my resume:\n\nSAM RIVERA\nsam@example.com\nEDUCATION\nExample College, 2022-09 to 2025-04\nEXPERIENCE\nDeveloper, Example Co, 2024-01 to Present\n- Responsible for the company website\n- Helped with moving the site to React",
+      "expected_output": "Writes facts.md and a changes.md with numbered rows citing rules, shows it, and asks which rows to reject before any render.",
+      "files": [],
+      "assertions": [
+        "changes.md has the columns #, Section, Type, Before, After, Rule",
+        "Every row names a rule number from rules.md",
+        "Education moving after Experience is a Layout row citing rule 11",
+        "render.sh is not run before the person replies to the table"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "no-invented-number",
+      "prompt": "Defaults are fine. One of my bullets says: 'Improved app performance significantly'. Fix my resume.",
+      "expected_output": "Turns the vague bullet into a Gap row with a question instead of adding a number.",
+      "files": [],
+      "assertions": [
+        "The bullet gets a Gap row whose After column is a question",
+        "No percentage, time or count appears that the person didn't give",
+        "The gap question is asked in the same batch as any other gap questions"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "no-latex",
+      "prompt": "All rows approved. Build it. (render.sh printed 'no LaTeX found' and exited 3.)",
+      "expected_output": "Hands over resume.tex with the online compile steps and the install command for the person's OS, and stops.",
+      "files": [],
+      "assertions": [
+        "resume.tex is handed over",
+        "The online compile steps from the README are given",
+        "No install command is run by the assistant"
+      ]
+    }
+  ]
+}

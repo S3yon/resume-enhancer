@@ -19,7 +19,7 @@ if [ -z "${PDFLATEX:-}" ]; then
   PDFLATEX=pdflatex
 fi
 command -v "$PDFLATEX" >/dev/null 2>&1 || {
-  echo "no LaTeX found (looked for $PDFLATEX). See the README's LaTeX section."
+  echo "no LaTeX found (looked for $PDFLATEX). See latex.md in the skill folder."
   exit 3
 }
 

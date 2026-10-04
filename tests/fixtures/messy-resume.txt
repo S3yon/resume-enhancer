@@ -1,0 +1,74 @@
+JORDAN LEE
+Springfield | 555-0100 | jordan.lee@example.com | https://www.linkedin.com/in/jordanlee
+
+OBJECTIVE
+Motivated and hardworking computer science student seeking a challenging software developer
+internship where I can apply my skills and grow as a professional.
+
+EDUCATION
+Example College, Springfield
+Computer Programming and Analysis, Advanced Diploma, 2023-09 to 2026-04
+GPA: 3.6
+Courses: Data Structures, Databases, Web Development, Operating Systems, Software Testing,
+Mobile Development, Networking, Cloud Computing
+
+SKILLS
+I am skilled in Python, Java, JavaScript, React, Node.js, SQL, PostgreSQL, MongoDB, Git,
+Docker, AWS, Linux, Jira and Agile, and I am a fast learner and a strong team player.
+
+WORK EXPERIENCE
+Junior Developer, Example Health, Springfield          May '24 - Present
+- Responsible for maintaining the patient booking web app built with React and Node.js
+- Helped with migrating the appointment database from MySQL to PostgreSQL
+- Improved app performance significantly
+- Write unit tests with Jest for new features before each release
+- Attend daily stand-ups and sprint planning with a team of 6 developers
+
+Software Developer Intern, Example Logistics, Springfield     2023-05 - 2023-08
+- Develop internal dashboards in React that show shipment status for the operations team
+- Build a Python script that reads carrier emails and updates delivery dates in the database
+- Fix bugs reported by users in the tracking portal and write documentation for each fix
+- Was responsible for creating a REST API in Node.js and Express that lets the warehouse team look up any order by its tracking number, customer name or date range, which they use every day
+
+Teaching Assistant, Example College, Springfield     Jan 2025 - Apr 2025
+- Ran weekly lab sessions for 45 students in an introductory Java course
+- Graded assignments and gave written feedback within one week
+- Held office hours twice a week
+
+Store Associate, Example Grocery, Springfield     Summer 2022
+- Helped customers find products and handled the cash register
+- Trained 3 new associates on store procedures
+
+PROJECTS
+Trip Planner (Example Hacks 2024)
+- Built a trip planning web app with React and the Google Maps API at a 24-hour hackathon
+- Worked on the frontend with two teammates
+- Won second place out of 40 teams
+
+Budget Bot
+- Created a Discord bot in Python that tracks shared expenses for a group
+- Stores data in MongoDB
+- Used by 25 people in my program
+
+Study Buddy (Example Hacks 2025)
+- Built a flashcard app in React Native with a Node.js backend
+- Added spaced-repetition scheduling so cards come back when they are due
+- Demoed to 3 judges and placed in the top 10
+
+Weather Dashboard
+- Built a dashboard in JavaScript that shows a 7-day forecast from a public weather API
+- Cached responses in localStorage to stay under the API's rate limit
+- Wrote end-to-end tests with Cypress
+
+Personal Website
+- Made a personal website with HTML and CSS
+- Hosted on GitHub Pages
+
+INVOLVEMENT
+Example College Coding Club, Events Coordinator, 2024-09 to Present
+- Organized 8 workshops on Git, Python and web development for 30+ students each
+- Ran the club's first 12-hour hackathon with 60 participants
+Example Food Bank, Volunteer, 2022 to 2023
+- Sorted donations and packed food hampers on weekends
+
+References available upon request.

@@ -149,13 +149,22 @@ class Template(unittest.TestCase):
                      "before the daily planning call starts}\n")
         body = SAMPLE.read_text().replace("      \\resumeItemListEnd", long_item + "      \\resumeItemListEnd", 1)
         out = fill_check(filled("dense", body))
-        self.assertIn("wrapped bullets: 1", out)
-        self.assertRegex(out, r"<- wrapped bullet")
+        self.assertIn("wrapped lines: 1", out)
+        self.assertRegex(out, r"<- wrapped")
 
     def test_fill_check_no_false_wrap(self):
         out = fill_check(filled("dense"))
-        self.assertIn("wrapped bullets: 0", out)
-        self.assertNotIn("<- wrapped bullet", out)
+        self.assertIn("wrapped lines: 0", out)
+        self.assertNotIn("<- wrapped", out)
+
+    def test_fill_check_flags_wrapped_skill_line(self):
+        long_line = ("     \\textbf{Tools}{: Git, Docker, Linux, Kubernetes, Terraform, Ansible, Jenkins, "
+                     "GitHub Actions, Prometheus, Grafana, Postman, Figma, Jira, Confluence, Notion, Slack, "
+                     "Visual Studio Code}")
+        body = SAMPLE.read_text().replace("     \\textbf{Tools}{: Git, Docker, Linux}", long_line, 1)
+        self.assertNotEqual(body, SAMPLE.read_text())
+        out = fill_check(filled("dense", body))
+        self.assertIn("wrapped lines: 1", out)
 
 
 if __name__ == "__main__":

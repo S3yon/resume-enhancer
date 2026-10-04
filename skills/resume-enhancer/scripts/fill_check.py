@@ -2,9 +2,10 @@
 """Show how full each line of a resume PDF is, so bullets can be sized to the right margin.
 
 Usage: fill_check.py <resume.pdf>
-Prints each line's fill (% of the widest line) and its text, then a summary. A bullet that
-wraps leaves a line starting where bullet text starts, with no bullet mark; it is flagged
-'<- wrapped bullet'. Pages after the first are marked P2, P3.
+Prints each line's fill (% of the widest line) and its text, then a summary. Flags '<- wrapped'
+on a line that starts where bullet text starts with no bullet mark (a wrapped bullet), and on a
+line in the skills section that doesn't open with a 'Label:' (a wrapped skill line). Pages
+after the first are marked P2, P3.
 """
 import re
 import subprocess
@@ -24,10 +25,15 @@ bottom = max(r[2] for r in rows if r[0] == 1)
 # where bullet text starts: the first word after the bullet mark
 text_x = min((w[1][0] for *_, w in rows if len(w) > 1 and w[0][1] == "•"), default=None)
 wrapped = 0
+section = ""
 for n, x0, y, x1, words in rows:
     fill = (x1 - left) / (right - left) * 100
     text = " ".join(w for _, w in words)
-    wrap = text_x is not None and words[0][1] != "•" and abs(x0 - text_x) < 2
+    title = re.fullmatch(r"[A-Z][A-Z &/-]{1,40}", text)
+    if title:
+        section = text
+    wrap = (text_x is not None and words[0][1] != "•" and abs(x0 - text_x) < 2) or (
+        "SKILL" in section and not title and not re.match(r"[^:]{1,40}:", text))
     wrapped += wrap
-    print(f"{'P'+str(n) if n > 1 else '  '} {fill:5.1f}%  {text[:110]}{'  <- wrapped bullet' if wrap else ''}")
-print(f"pages={len(pages)}  last line of page 1 at y={bottom:.0f} of 792pt  wrapped bullets: {wrapped}")
+    print(f"{'P'+str(n) if n > 1 else '  '} {fill:5.1f}%  {text[:110]}{'  <- wrapped' if wrap else ''}")
+print(f"pages={len(pages)}  last line of page 1 at y={bottom:.0f} of 792pt  wrapped lines: {wrapped}")

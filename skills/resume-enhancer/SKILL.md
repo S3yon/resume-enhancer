@@ -7,7 +7,8 @@ description: Rebuild a resume to a one-page house style, show every change with 
 
 Rebuilds a resume to the house style in [rules.md](rules.md) and renders it in the house
 template. Every change is shown first with the rule behind it, and nothing is made up.
-Script paths are relative to this skill's folder.
+`<skill>` below is this skill folder's absolute path. Run every command from the person's folder,
+so their files never land in the skill folder.
 
 ## 1. Intake
 
@@ -21,7 +22,7 @@ Script paths are relative to this skill's folder.
   `pdftotext -layout original.pdf original.txt`; for a DOCX on macOS,
   `textutil -convert txt original.docx`. If that doesn't work, ask them to paste the text.
 
-- For a PDF, also run `python3 scripts/pdf_links.py original.pdf`. pdftotext drops link
+- For a PDF, also run `python3 <skill>/scripts/pdf_links.py original.pdf`. pdftotext drops link
   targets; this lists each link with its text. Keep them in `facts.md`.
 
 - Bold, italics and layout don't carry over from the original. Rule 19 decides what is bold.
@@ -83,17 +84,17 @@ original text. Nothing is rendered before this reply.
 
 ## 7. Build
 1. Write `body.tex` with the approved changes, using the macros below.
-2. `python3 scripts/fill_template.py body.tex resume.tex --look <dense|roomy>`
-3. `bash scripts/render.sh resume.tex resume.pdf <1|2>`, then act on what it prints:
+2. `python3 <skill>/scripts/fill_template.py body.tex resume.tex --look <dense|roomy>`
+3. `bash <skill>/scripts/render.sh resume.tex resume.pdf <1|2>`, then act on what it prints:
 
 | render.sh prints | Do this |
 |---|---|
 | `OK` | Go on. |
-| `FAIL: rendered N pages` | Run `fill_check.py` on the `-overflow.pdf` it names to see what spilled. Propose Cut rows for about that much, weakest lines first, get a yes, rebuild. Never shrink fonts, margins or macros to fit. |
+| `FAIL: rendered N pages` | Run `<skill>/scripts/fill_check.py` on the `-overflow.pdf` it names; its last line counts what spilled. Propose Cut rows for about that much, weakest lines first, get a yes, rebuild. Never shrink fonts, margins or macros to fit. |
 | `missing LaTeX package: X.sty` | Give the install line for their system from [latex.md](latex.md) and stop. |
 | `no LaTeX found` (exit 3) | Hand over `resume.tex` and `changes.md` with the online steps and the install line from [latex.md](latex.md). Say the page count is unchecked: if it compiles past the limit, they can come back for cuts. Stop. Install nothing yourself. |
 
-4. `python3 scripts/fill_check.py resume.pdf`. Shorten every line flagged `<- wrapped bullet`.
+4. `python3 <skill>/scripts/fill_check.py resume.pdf`. Shorten every line flagged `<- wrapped`.
    A bullet under 90% has room: add a true detail from `facts.md` if one fits, otherwise leave
    it. Never pad. Log each fix as a row of type `fit`.
 5. `pdftotext -layout resume.pdf -` must read cleanly: sections in order, each heading on one

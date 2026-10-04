@@ -155,6 +155,7 @@ class Template(unittest.TestCase):
     def test_fill_check_no_false_wrap(self):
         out = fill_check(filled("dense"))
         self.assertIn("wrapped lines: 0", out)
+        self.assertIn("lines past page 1: 0", out)
         self.assertNotIn("<- wrapped", out)
 
     def test_fill_check_flags_wrapped_skill_line(self):
@@ -165,6 +166,14 @@ class Template(unittest.TestCase):
         self.assertNotEqual(body, SAMPLE.read_text())
         out = fill_check(filled("dense", body))
         self.assertIn("wrapped lines: 1", out)
+
+    def test_fill_check_counts_lines_past_the_limit(self):
+        with tempfile.TemporaryDirectory() as d:
+            pdf = Path(d) / "two.pdf"
+            self.assertEqual(render(doc(2, "\\pagestyle{empty}\n"), "2", keep=pdf)[0], 0)
+            r = subprocess.run([sys.executable, str(SCRIPTS / "fill_check.py"), str(pdf)],
+                               capture_output=True, text=True, check=True)
+        self.assertIn("lines past page 1: 1", r.stdout)
 
 
 if __name__ == "__main__":

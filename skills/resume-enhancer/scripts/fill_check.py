@@ -5,7 +5,7 @@ Usage: fill_check.py <resume.pdf>
 Prints each line's fill (% of the widest line) and its text, then a summary. Flags '<- wrapped'
 on a line that starts where bullet text starts with no bullet mark (a wrapped bullet), and on a
 line in the skills section that doesn't open with a 'Label:' (a wrapped skill line). Pages
-after the first are marked P2, P3.
+after the first are marked P2, P3, and the summary counts their lines.
 """
 import re
 import subprocess
@@ -36,4 +36,6 @@ for n, x0, y, x1, words in rows:
         "SKILL" in section and not title and not re.match(r"[^:]{1,40}:", text))
     wrapped += wrap
     print(f"{'P'+str(n) if n > 1 else '  '} {fill:5.1f}%  {text[:110]}{'  <- wrapped' if wrap else ''}")
-print(f"pages={len(pages)}  last line of page 1 at y={bottom:.0f} of 792pt  wrapped lines: {wrapped}")
+past = sum(1 for r in rows if r[0] > 1)
+print(f"pages={len(pages)}  last line of page 1 at y={bottom:.0f} of 792pt  "
+      f"wrapped lines: {wrapped}  lines past page 1: {past}")

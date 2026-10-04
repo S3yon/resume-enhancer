@@ -73,10 +73,15 @@ Check every line against rules.md and the preferences, then write `changes.md`:
 Never invent a number, team size, result, date, link or contact item. A guess is a Gap row, not
 an edit.
 
+Check the length before asking anything: fill and render the audited draft once (step 7,
+items 1-3). If it runs over the page limit, add Cut rows now, so the person approves cuts with
+everything else and isn't asked about entries that will go. Cut the weakest first: oldest, least
+specific, or least related to the target role.
+
 ## 5. Gap questions, one batch
 Ask every Gap row's question in one message. Each answer goes into `facts.md`, then into the
-bullet, and the row is updated. Anything unanswered stays as the person wrote it, with
-nothing added.
+bullet, and the row is updated. Anything unanswered, "unknown" included, stays as the person
+wrote it with nothing added. Only an answer like "that's not right" takes a line off (rule 26).
 
 ## 6. Approval
 Show `changes.md` and ask for the row numbers to reject, or "all good". Rejected rows keep the
@@ -92,11 +97,17 @@ original text. Nothing is rendered before this reply.
 | `OK` | Go on. |
 | `FAIL: rendered N pages` | Run `<skill>/scripts/fill_check.py` on the `-overflow.pdf` it names; its last line counts what spilled. Propose Cut rows for about that much, weakest lines first, get a yes, rebuild. Never shrink fonts, margins or macros to fit. |
 | `missing LaTeX package: X.sty` | Give the install line for their system from [latex.md](latex.md) and stop. |
-| `no LaTeX found` (exit 3) | Hand over `resume.tex` and `changes.md` with the online steps and the install line from [latex.md](latex.md). Say the page count is unchecked: if it compiles past the limit, they can come back for cuts. Stop. Install nothing yourself. |
+| `no LaTeX found` (exit 3) | Follow "No LaTeX" below and stop. |
+
+**No LaTeX:** hand over `resume.tex` and `changes.md` with the online steps from
+[latex.md](latex.md). Ask which system they use if you don't know, and give that one install
+line. Say the page count and wraps are unchecked; if it compiles past the limit, they can come
+back for cuts. Install nothing yourself.
 
 4. `python3 <skill>/scripts/fill_check.py resume.pdf`. Shorten every line flagged `<- wrapped`.
    A bullet under 90% has room: add a true detail from `facts.md` if one fits, otherwise leave
-   it. Never pad. Log each fix as a row of type `fit`.
+   it. Never pad. Log each fix as a row of type `fit`. When rules pull against each other, the
+   page rules win (1-3): a `fit` row may undo an approved row, and says which.
 5. `pdftotext -layout resume.pdf -` must read cleanly: sections in order, each heading on one
    line with its dates (rule 23).
 

@@ -10,7 +10,8 @@ rule, and the change table says so.
    has several bold spans.
 3. Minimal white space: every bullet fills 90-99% of its line when the facts allow (never
    pad), and the page runs to the bottom margin.
-4. Font: Source Sans Pro, 11pt, chosen for being narrow.
+4. Font: Source Sans Pro at an 11pt base size (most lines one step smaller), chosen for being
+   narrow.
 5. Margins about 0.5 in on all sides (0.75 in in the roomy look).
 6. Section titles in small caps with a full-width rule under them.
 
@@ -29,7 +30,8 @@ rule, and the change table says so.
     Frameworks, Data, Cloud, Tools), label in bold, comma list after. Include the concept words
     postings use (Machine Learning, REST APIs, Agile, OOP), not only tool names. No soft-skill
     claims (team player, fast learner); bullets show those. Listed skills that no bullet backs
-    get one question for the whole list: which can they defend in an interview (rule 27).
+    get one question for the whole list: which can they defend in an interview (rule 27). A
+    tool the bullets show they used may join the skills lines.
 
 13. **Experience:** `Bold Title | italic Company, team, City` on the left, dates on the right.
     A promotion is one entry with an arrow (`Developer → Senior Developer`). 1-5 bullets, the
@@ -53,12 +55,12 @@ rule, and the change table says so.
 19. Bold the technology and the number, not the verb. Numbers are bold and italic (`97.6%`,
     `500+`).
 20. Each bullet says what was built or done, with what, and the result or scale when one exists.
-21. Company and project names are underlined links when a link exists.
+21. Company, project, school and organization names are underlined links when a link exists.
 
 ## Dates and parsing
 22. One date format everywhere: `Oct 2020 -- Feb 2022`, `Present` for ongoing work. An expected
     future end date is fine. Separate stints at one place are listed with commas
-    (`Sep 2025, Sep 2026`).
+    (`Sep 2025, Sep 2026`). An unknown date stays blank; never guess it.
 23. Text extracted from the PDF (`pdftotext`) reads cleanly and in order.
 24. A target role or posting only reorders skill lines and projects and picks which concept
     words lead. It adds no new claims.

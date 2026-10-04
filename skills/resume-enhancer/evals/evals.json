@@ -46,7 +46,7 @@
       "files": [],
       "assertions": [
         "resume.tex is handed over",
-        "The online compile steps from the README are given",
+        "The online compile steps from latex.md are given",
         "No install command is run by the assistant"
       ]
     }

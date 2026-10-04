@@ -6,7 +6,7 @@ date, link or claim the person didn't give.
 
 | Skill | What it does |
 |---|---|
-| `resume-enhancer` | Asks a few setup questions, audits the resume against 28 rules, shows a change table to approve, then renders a one-page PDF. |
+| `resume-enhancer` | Asks a few setup questions, audits the resume against 28 rules, shows a change table to approve, then renders a PDF within the page limit (one page by default). |
 
 ## How it works
 
@@ -96,7 +96,6 @@ Copy one folder from `skills/` into the tool's skills folder:
 | Qwen Code | `~/.qwen/skills/` | `.qwen/skills/` |
 
 The manifests use the same formats as skill-kit. No install test was run in each tool.
-
 
 ## LaTeX
 
